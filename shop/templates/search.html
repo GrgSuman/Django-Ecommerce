@@ -110,6 +110,7 @@
 
 
 {%block content%}
+{% load static %}
 
 <div class="top_show_info">
     <h2>Search</h2>
@@ -131,7 +132,7 @@
     <section class="view_product" style="display: flex; justify-content: space-between;margin:80px 20px;">
         <span style="display: flex; align-items: flex-start;">
             <a href="{%url "more" item.id%}">
-                <img style="height: 100px; width:120px;" src="{%static product.img_link%}" alt="">
+                <img style="height: 100px; width:120px;" src="{%static item.img_link%}" alt="">
             </a>
            
             <div style="margin-left:20px;">
