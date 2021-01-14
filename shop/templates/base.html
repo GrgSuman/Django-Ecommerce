@@ -1,0 +1,1105 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static "css/home.css"%}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css">
+    <style>
+        body{
+            padding:0;
+           font-family: 'Rubik', sans-serif;
+            margin: 0;
+            box-sizing: border-box;
+            
+        }
+        body a{
+            text-decoration: none;
+        transition:.2s ease-in-out;
+
+        }
+       nav{
+           display: flex;
+           flex-direction: column;
+       }
+       .top_nav,.top_right{
+           display: flex;
+           justify-content: space-between;
+           font-family: 'Rubik', sans-serif;
+           font-size: 14px;
+       }
+       .top_nav{
+        background-color: #373f50;
+        padding: 15px 8%;
+       }
+       .top_nav a:hover{
+        color: white;
+        cursor: pointer;
+        transition:.2s ease-in-out;
+        
+       }
+       .top_right a{
+           margin: 0 10px;
+       }
+       .top_nav a{
+           color:#b8bbc1;
+       }
+
+       .bottom_nav{
+           display: flex;
+           align-items: center;
+          padding:25px 8%;
+          background-color: white;
+          /* box-shadow: 0px 2px 6px 0px rgb(0 0 0 / 8%); */
+       }
+       .acc_:hover{
+           cursor: pointer;
+       }
+       .bottom_nav h1{
+           margin: 0;
+           width: 25%;
+           font-size:25px;
+           font-family: 'Poppins', sans-serif;
+       }
+       .bottom_nav h1:hover{
+           cursor: pointer;
+       }
+       .bottom_nav form{
+           width: 40%;
+           display: flex;
+           justify-content: space-between;
+           margin: 0;
+           padding: 0;
+       }
+
+       .bottom_nav form input{
+           width:100%;
+           padding: 10px 20px;
+           outline: none;
+           font-family: sans-serif;
+           border: 2px solid #dae1e7;
+           border-right: none;
+
+       }
+       .bottom_nav form input::placeholder{
+        font-family: 'Rubik', sans-serif;
+        /* padding-left:10px; */
+       }
+       .bottom_nav form input:focus{
+        border: 2px solid #6969696b ;
+        border-right: none;
+
+       }
+       .bottom_nav form button{
+           border: none;
+           outline: none;
+           padding: 10px 20px;
+           background-color: #fe696a;
+           color: white;
+           margin: 0;
+       }
+       .bottom_nav form button:hover{
+           cursor: pointer;
+           background-color: #fe6975;
+
+           
+       }
+
+       .bottom_nav div{
+           width:35%;
+           display: flex;
+           justify-content: flex-end;
+           font-size: 16px;
+           
+       }
+       .bottom_nav div a{
+        margin: 0 12px;
+        color: rgba(0, 0, 0, 0.616);
+        transition:.2s ease-in-out;
+       }
+
+       .bottom_nav div a:hover{
+        color: rgba(0, 0, 0, 0.726);
+        transition:.2s ease-in-out;
+       }
+       .nav_fix{
+           position: fixed;
+           width: 84%;
+           background-color: #373f50;
+           z-index: 234445432;
+           padding: 30px 8%;
+          box-shadow: 0px 2px 6px 0px rgb(0 0 0 / 8%);
+
+       }
+       .nav_fix h1{
+           color: white;
+       }
+
+       .nav_fix div a{
+           color: rgba(255, 255, 255, 0.76);
+       }
+
+       .nav_fix div a:hover{
+           color: rgba(255, 255, 255, 0.897);
+       }
+
+ .login_overlay{
+     height: 100%;
+     width: 100%;
+     position: fixed;
+     top: 0;
+     left: 0;
+     bottom: 0;
+     background-color:rgba(0, 0, 0, 0.5);
+     z-index: 9999;
+     display: none;
+     justify-content: center;
+     align-items: center;
+     transition: .3s linear;
+ }
+ 
+
+ .login_box{
+    width:30%;
+    background-color: white;
+    border-radius: 10px;
+    position: relative;
+    padding:20px 25px;
+
+ }
+ 
+
+ .login_top{
+     display: flex;
+     justify-content: flex-start;
+     border-bottom: 1px solid #e3e9ef;
+     padding-bottom:0px;
+ }
+ .login_top p{
+     margin-right:30px;
+     font-size: 16px;
+     font-weight: normal;
+     font-family: 'Montserrat';
+ }
+ .login_top i{
+     font-weight: 100;
+     font-size: 14px;
+     margin-right: 5px;
+ }
+ .login_top .close{
+     position: absolute;
+     right: 20px;
+     top: 15px;
+     font-size: 18px;
+     transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+ }
+ .login_top .close:hover{
+     transform: scale(1.2);
+     cursor: pointer;
+     transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+ }
+ .login_form input{
+     display: block;
+      margin-top: 30px;
+      padding: 10px;
+      width:calc(100% - 20px);
+      font-size: .9375rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #4b566b;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #dae1e7;
+    font-family: "Montserrat";
+    border-radius: .3125rem;
+    box-shadow: 0 0 0 0 transparent;
+    transition: border-color 0.2s ease-in-out,box-shadow 0.2s ease-in-out;
+
+ }
+
+ .login_form a{
+     display: block;
+     text-align: right;
+     margin: 15px 0;
+ }
+ .login_form button{
+     width: 100%;
+     padding: 12px 15px;
+     margin: 15px 0;
+     box-shadow: 0 0.5rem 1.125rem -0.5rem rgba(254,105,106,0.9);
+     border: none;
+     outline: none;
+     font-size: 16px;
+     background-color: #fe696a;
+     font-family: 'Montserrat';
+     color: white;
+     transition: .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+ }
+ .login_form button:hover{
+     cursor: pointer;
+     box-shadow: none;
+     transition: .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+ }
+ .login_form input:focus{
+    color: #4b566b;
+    background-color: #fff;
+    border-color: rgba(254,105,106,0.3);
+    outline: 0;
+    transition: .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-shadow: 0 0 0 0 transparent, 0 0.375rem 0.625rem -0.3125rem rgba(254,105,106,0.15);
+ }
+ .eye{
+    position: relative;
+}
+
+ .acc_login:hover,.acc_signup:hover{
+     cursor: pointer;
+     color: #fe696a;
+ }
+ .acc_active{
+     color: #fe696a;
+     position: relative;
+ }
+ .acc_active::after{
+     content: "";
+    position: absolute;
+    border-bottom: 1px solid #fe696a;
+    height: 1px;
+    width: 70%;
+    left: 19px;
+    bottom: -17px;
+ }
+ .s_form{
+   display: none;
+ }
+
+       /* FOOTER */
+     .footer{
+    margin-top: 100px;
+    font-family: 'Rubik', sans-serif;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding: 100px 10%;
+    /* background:url('/uploads/back.png')black; */
+    background-color:#373f50 ;
+    background-repeat: no-repeat;
+    color: white;
+}
+
+.footer ul li{
+    list-style: none;
+    margin: 15px 0;
+}
+.footer ul li a{
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.822);
+    font-size: 14px;
+
+}
+.footer ul li a:hover{
+    color: red;
+}
+.footer p{
+    font-size: 14px;
+    margin: 20px 0;
+    line-height: 1.7em;
+}
+.footer form{
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+.footer form input{
+    flex:3;
+    font-size: 14px;
+    padding: 10px 15px;
+    height:25px;
+    outline: none;
+    border: none;
+}
+.footer form button{
+    flex: 1;
+    padding: 0px 15px;
+    height:45px;
+    font-size: 14px;
+    background-color: #d68215af;
+    outline: none;
+    border: none;
+    color: white;
+
+}
+.footer button:hover{
+    cursor: pointer;
+}
+.footer span i{
+    margin: 10px;
+    color: rgba(255, 255, 255, 0.781);
+}
+.footer span i:hover{
+    color: white;
+    transform: scale(1.3);
+    cursor: pointer;
+}
+.footer ul{
+    padding: 0;
+}
+@media(max-width:1180px){
+    .footer{
+        padding: 50px 3%;
+    }
+}
+@media(max-width:980px){
+    .footer{
+        padding: 50px 13%;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 20px;
+    }
+}
+@media(max-width:980px){
+    .footer{
+        padding: 50px 5%;
+      
+    }
+    .div_four{
+        margin-left: -10px;
+    }
+}
+@media(max-width:540px){
+   
+    .footer{
+        padding:40px 20%;
+        grid-template-columns: 1fr;
+    }
+}
+@media(max-width:390px){
+    .footer{
+        padding:40px 2%;
+    }
+    .div_four{
+        margin-left: 0px;
+    }
+}
+.err,.s_err{
+    display: none;
+}
+.wishListPro{
+    width: 35%;
+    background-color: white;
+    position: fixed;
+    top: 160px;
+    padding: 20px 30px;
+    right: 50px;
+    z-index: 999999;
+    box-shadow: 0px 0px 13px -1px rgba(0,0,0,0.19);
+  
+}
+
+#close_wish{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 4342;
+}
+#close_wish:hover{
+    cursor: pointer;
+}
+       
+       .close_wishDiv{
+           display: none;
+       }
+
+       .success{
+            position: fixed;
+            width:30%;
+            background-color: #42d697;
+            color: white;
+            padding: 10px 20px;
+            z-index: 123;
+            font-family: 'Montserrat';
+            top: 155px;
+            border-radius: 13px;
+            right: 8%;
+            display: none;
+            justify-content: space-between;
+        }
+
+        .add-to-cart:hover,.quantity-add:hover,.quantity-minus:hover,.remove-from-cart:hover{
+            cursor: pointer;
+        }
+
+        /* FOR SMALL DEVICES */
+        .item_parent{
+            font-size: 20px;
+            position: relative;
+        }
+        .item_indicator{
+            font-size: 14px;
+            position: absolute;
+            top: -14px;
+            border-radius: 50%;
+            background: #fe6d6e;
+            color: white;
+            padding: 3px 6px;
+        }
+        .bottom_sm_nav{
+            justify-content: space-between;
+        }
+
+          
+          .form_sm_{
+              display: none;
+            width:84%;
+           padding:20px 8%;
+          box-shadow: 0px 2px 6px 0px rgb(0 0 0 / 8%);
+          }
+        .form_sm_ form{
+           display: flex;
+           justify-content: space-between;
+           margin: 0;
+           padding: 0;
+       }
+
+       .form_sm_ form input{
+           width:100%;
+           padding: 10px 20px;
+           outline: none;
+           font-family: sans-serif;
+           border: 2px solid #dae1e7;
+           border-right: none;
+
+       }
+       .form_sm_ form input::placeholder{
+        font-family: 'Rubik', sans-serif;
+       }
+       .form_sm_ form input:focus{
+        border: 2px solid #6969696b ;
+        border-right: none;
+
+       }
+       .form_sm_ form button{
+           border: none;
+           outline: none;
+           padding: 10px 20px;
+           background-color: #fe696a;
+           color: white;
+           margin: 0;
+       }
+       .form_sm_ form button:hover{
+           cursor: pointer;
+           background-color: #fe6975;
+
+           
+       }
+
+       .nav_fix_sm{
+           background-color: #373f50;
+           padding: 20px 8%;
+          box-shadow: 0px 2px 6px 0px rgb(0 0 0 / 8%);
+
+       }
+       .nav_fix_sm h1{
+           color: white;
+       }
+
+       .nav_fix_sm div a{
+           color: rgba(255, 255, 255, 0.76);
+       }
+
+       .nav_fix_sm div a:hover{
+           color: rgba(255, 255, 255, 0.897);
+       }
+       .nav_fix_sm{
+               display: none;
+           }
+           
+        
+        .sm_menus{
+            padding: 20px 30px;
+            background-color: white;
+            position: fixed;
+            top: 9%;
+            right: 8%;
+            width: 20%;
+            padding-left: 25px;
+            border-radius: 10px;
+            display: none;
+            box-shadow: 2px 3px 13px 5px rgb(0 0 0 / 8%);
+        }
+        .sm_menus ul li{
+            list-style: none;
+            margin: 35px 0;
+        }
+
+          .sm_menus ul li a{
+              color: rgba(0, 0, 0, 0.85);
+          }
+          .sm_menus ul li a:hover{
+              cursor: pointer;
+              color: rgba(0, 0, 0, 0.9);
+          }
+
+
+     
+       @media(max-width: 1070px){
+
+        .top_show_info{
+            margin-top: 150px;
+        }
+
+        nav{
+           position: fixed;
+           z-index: 312321;
+           width: 100%;
+           top: 0;
+           left: 0;
+       }
+
+        .owl-carousel{
+               margin-top: 150px;
+           }
+
+        .bottom_nav{
+               display: none;
+           }
+           .nav_fix_sm{
+               display: flex;
+           }
+           .top_nav{
+               display: none;
+           }
+           
+           .form_sm_{
+               display: block;
+           }
+       }
+       @media(max-width: 900px){
+           .success{
+               width: 40%;
+           }
+       }
+       @media(max-width:945px){
+           .wishListPro{
+               width: 45%;
+           }
+        .sm_menus{
+            width: 23%;
+        }
+        .login_box{
+            width: 45%;
+        }
+       }
+       
+       @media(max-width: 865px){
+        .single_hero {
+        margin: 20px 4%;
+        
+      }
+       }
+       @media(max-width:830px){
+        .sm_menus{
+            width: 30%;
+        }
+        @media(max-width: 700px){
+           .success{
+               width: 55%;
+           }
+           .wishListPro{
+               width: 60%;
+           }
+       }
+        @media(max-width:650px){
+        .sm_menus{
+            width: 40%;
+        }
+        .login_box{
+            width: 60%;
+        }
+
+       }
+       @media(max-width: 500px){
+           .success{
+               width: 70%;
+           }
+       }
+
+       @media(max-width:485px){
+        .sm_menus{
+            width: 50%;
+        }
+        .login_box{
+            width: 70%;
+        }
+        .wishListPro{
+               width: 80%;
+               right: 30px;
+               padding: 20px 15px;
+           }
+       }
+       }
+       @media(max-width:400px){
+        .sm_menus{
+            width: 60%;
+            padding: 20px 0;
+        }
+        .success{
+               width: 75%;
+               right: 5%;
+               font-size: 15px;
+           }
+        .item_parent{
+               margin-right: 10px!important;
+           }
+           .login_box{
+            width: 80%;
+        }
+       }
+     
+
+      
+        
+
+    </style>
+
+    {%block style%}
+    {%endblock%}
+    
+    <title>ElectroNepal</title>
+</head>
+<body>
+
+
+    <nav>
+
+        <section class="top_nav">
+            <div>
+                <a><span style="color: yellowgreen;"><i class="fas fa-phone-alt" style="font-size: 14px; margin-right: 5px;"></i> Support : </span> (+977)981652155</a>
+            </div> 
+
+            <div class="top_right">
+                <a><i class="fas fa-map-marker-alt"  style="font-size: 14px; margin-right: 5px;"></i> Store Location</a>
+                <a href="{%url "track"%}">Track Your Order</a>
+                {%if user.is_authenticated%}
+                <a class="open_wish"><i class="far fa-heart"></i> My Wishlist ({{wishLen}})</a>
+                {%else%}
+                <a class="acc_1"><i class="far fa-heart"></i> My Wishlist ({{wishLen}})</a>
+                {%endif%}
+            </div> 
+
+        </section>
+
+         <section class="bottom_nav animate__animated ">
+            <h1>Electro<span>Nepal</span></h1>
+
+            <form action="{%url "search"%}">
+            <input type="text" placeholder="What are you looking for?" required name="q" id="srh">
+            <button type="submit"><i class="fas fa-search"></i></button>
+            </form>
+
+            <div>
+
+            {%if user.is_authenticated%}
+            <a href="{%url "logout"%}"><i class="far fa-user"></i> Logout({{request.user}})</a>
+            {%else%}
+            <a class="acc_"><i class="far fa-user" style="margin: 0 5px;"></i> My Account</a>
+            {%endif%}
+            <a href="{%url "cart"%}" class="animate__animated animate__pulse"><i class="fas fa-shopping-cart" style="margin: 0 5px;"></i> MyCart( <span id="cart_count">{{cart}}</span> ) <i style="margin-left:  5px;" class="fas fa-caret-down"></i></a>
+
+            </div>
+            
+        </section> 
+
+        <section class="bottom_nav animate__animated bottom_sm_nav nav_fix_sm">
+            <h1>Electro<span>Nepal</span></h1>
+
+            <div class="small_nav">  
+                <a href="{%url "cart"%}" class="item_parent animate__animated animate__pulse" style="margin-right: 30px;"><i class="fas fa-shopping-cart" style="margin: 0 5px;"></i>  <span id="cart_count" class="item_indicator">{{cart}}</span></a>
+                <a class="item_menus" style="margin-left: 30px;"><i class="fas fa-ellipsis-v "></i></a>
+            </div> 
+            
+        </section>
+
+        <div class="sm_menus animate__animated">
+            <ul>
+                <li>
+                    <a><i class="fas fa-map-marker-alt"  style="font-size: 14px; margin-right: 5px;"></i> Store Location</a>
+                </li>
+
+                <li>
+                    {%if user.is_authenticated%}
+                    <a class="open_wish"><i class="far fa-heart" style="font-size: 14px; margin-right: 5px;"></i> My Wishlist ({{wishLen}})</a>
+                    {%else%}
+                    <a class="acc_1"><i class="far fa-heart" style="font-size: 14px; margin-right: 5px;"></i> My Wishlist ({{wishLen}})</a>
+                    {%endif%}
+                </li>
+
+                <li>
+                    <a href="{%url "track"%}"><i class="fas fa-truck-moving" style="font-size: 14px; margin-right: 5px;"></i> Track Your Order</a>
+                </li>
+
+                <li>
+                    {%if user.is_authenticated%}
+                    <a href="{%url "logout"%}"><i class="far fa-user" style="font-size: 14px; margin-right: 5px;"></i> Logout({{request.user}})</a>
+                    {%else%}
+                    <a class="acc_2"><i class="far fa-user" style="font-size: 14px; margin-right: 5px;"></i> My Account</a>
+                    {%endif%}
+                </li>
+            </ul>
+        </div>
+
+        <div class="form_sm_" style="background-color: white;">
+                <form action="{%url "search"%}">
+                            <input type="text" placeholder="What are you looking for?" required name="q" id="srh_sm">
+                            <button type="submit"><i class="fas fa-search"></i></button>
+                 </form>
+        </div>
+
+        
+
+    </nav>
+
+    {%if user.is_authenticated%}
+    <section style="position: relative;" class="close_wishDiv">
+
+    <div class="wishListPro">
+        <i class="fas fa-times close" id="close_wish"></i>
+        <h2 style="margin: 0;border-bottom: 1px solid #e3e9ef;padding-bottom: 9px;font-size: 17px;">{{request.user}}'s Wishlist</h2>
+        {%if wishProducts%}
+        {%for product in wishProducts%}
+        <section style="display: flex; justify-content: space-between; align-items: center;margin: 15px 0;">
+            <img src="{%static product.product.img_link%}" alt="" height="50px" width="50px">
+            <h4 style="margin:0 20px; font-weight: 100; font-size: 14px;">
+                <a href="{%url "more" product.product.id%}">{{product.product.name}}</a>
+                <a style="font-family: 'Roboto';display: block;margin-top:10px;color: red;font-size: 12px;" class="rem__" href="{%url "addWish" product.product.id%}?rem=1">Remove <i class="fas fa-trash" style="font-size: 12px; margin-left: 5px;"></i></a> 
+            </h4>
+            <a href="{%url "more" product.product.id%}" style="background-color: #fe696a; color: white; padding: 8px 12px; font-size: 14px;border-radius: 7px; font-family: Rubik;" >View</a>
+        </section>
+        {%endfor%}
+        {%else%}
+         <h3>You dont have any wishLists.</h3>
+        {%endif%}
+    </div>
+</section>
+
+    {%endif%}
+
+    <p class="success animate__animated animate__fadeInRight common"> <span class="msg">  </span><span> <i style="font-weight: 100;" class="fas fa-times rem"></i></span></p>
+
+    {%block content%}
+    {%endblock content%}
+
+
+    <div class="login_overlay">
+
+        <div class="login_box">
+         <div class="login_top">
+             <p class="acc_active acc_login"><i class="fas fa-sign-in-alt"></i> Login</p>
+             <p class=" acc_signup"><i class="fas fa-user-plus"></i> SignUp</p>
+             <i class="fas fa-times close"></i>
+         </div>
+
+         <div class="login_form">
+
+             <form action="{%url "login"%}" method="POST" class="l_form">
+                 {%csrf_token%}
+                 <span style="font-size: 14px; color: red; margin-top: 20px; display: block;" class="err "></span>
+                 <input type="text" placeholder="Username" required name="username"  class="l_name">
+                 <div class="eye">
+                    <input type="password" placeholder="Password" required name="password"  class="l_pass">
+                 </div>
+                 <a href="">Forget Password ?</a>
+                 <button>Login</button>
+             </form>
+
+             <form action="{%url "register"%}" class="s_form" method="POST">
+                {%csrf_token%}
+                <span style="font-size: 14px; color: red; margin-top: 20px; display: block;" class="s_err"></span>
+                <input type="text" placeholder="Full Name" name="username" required class="s_name">
+                <input type="text" placeholder="Email address" name="name" required class="s_email" >
+                <input type="password" placeholder="Password" name="password1" required class="s_pass">
+                <input type="password" placeholder="Confirm Password" name=password2 required  class="s_cpass">
+                <button style="margin-top:30px;">SignUp</button>
+            </form>
+         </div>
+        </div>
+
+    </div>
+
+
+
+    <div class="footer">
+        <div class="div_one">
+        <div class="logo">
+      <h1>ElectroNepal</h1>
+      </div>
+      <p>“Always deliver more than expected.”</p>
+        </div>
+
+        <div class="div_two">
+            <h4>Useful Links</h4>
+            <ul>
+                <li><a href="">Home</a></li>
+                <li><a href="">Privacy Policy</a></li>
+                <li><a href="">FAQ</a></li>
+                <li><a href="">Terms and conditions</a></li>
+
+            </ul>
+
+        </div>
+
+        <div class="div_three">
+            <h4>Top Categories</h4>
+            <ul>
+                <li><a href="{%url "cate"%}?category=Watchs">Watchs</a></li>
+                <li><a href="{%url "cate"%}?category=Smartphones">Smartphones</a></li>
+                <li><a href="{%url "cate"%}?category=Speakers">Speakers</a></li>
+                <li><a href="{%url "cate"%}?category=Gaming">Gaming</a></li>
+                <li><a href="{%url "cate"%}?category=Headphones">Headphones</a></li>
+            </ul>
+
+        </div>
+
+        <div class="div_four">
+          <h4>Join our Newsletter</h4>
+          <p>Get E-mail updates about our latest shop and special offers.</p>
+         <form method="dialog">
+             <input type="email" placeholder="Enter your email"/>
+             <button>Subscribe</button>
+         </form>
+         <span>
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-whatsapp"></i>
+            <i class="fab fa-youtube"></i>
+         </span>
+        </div>
+    </div>
+   
+
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script>
+
+    document.querySelector(".nav_fix_sm h1").addEventListener("click",()=>{window.location.href="/"})
+
+let wdth=window.innerWidth;
+window.addEventListener('resize',(e)=>{
+    wdth=window.innerWidth  
+    if(wdth>1070){
+   document.querySelector(".sm_menus").classList.remove("animate__slideInDown")
+   document.querySelector(".sm_menus").style.display="none"
+    }
+})
+
+
+window.addEventListener('scroll',(e)=>{
+
+if(wdth>1070){
+    var scroll = Math.floor(this.scrollY);
+    if (scroll>=120){
+        document.querySelector(".bottom_nav").classList.add("nav_fix")
+        document.querySelector(".bottom_nav").classList.add("animate__fadeInDown")
+
+    }
+    else{
+        document.querySelector(".bottom_nav").classList.remove("animate__fadeInDown")
+        document.querySelector(".bottom_nav").classList.remove("nav_fix")
+
+    }
+
+}
+   
+    })
+
+    document.querySelector(".bottom_nav h1").addEventListener("click",()=>window.location.href="/")
+
+    login=document.querySelector(".acc_login")
+    signup=document.querySelector(".acc_signup")
+    l_form=document.querySelector(".l_form")
+    s_form=document.querySelector(".s_form")
+
+    login.addEventListener("click",()=>{
+        login.classList.add("acc_active")
+        signup.classList.remove("acc_active")
+        l_form.style.display="block"
+        s_form.style.display="none"
+    })
+
+    signup.addEventListener("click",()=>{
+        login.classList.remove("acc_active")
+        signup.classList.add("acc_active")
+        l_form.style.display="none"
+        s_form.style.display="block"
+    })
+
+try{
+     document.querySelector(".acc_").addEventListener('click',()=>{
+       document.querySelector(".login_overlay").style.display="flex"
+   })
+   document.querySelector(".acc_1").addEventListener('click',()=>{
+       document.querySelector(".login_overlay").style.display="flex"
+   })
+   document.querySelector(".acc_2").addEventListener('click',()=>{
+       document.querySelector(".login_overlay").style.display="flex"
+       document.querySelector(".sm_menus").classList.remove("animate__slideInDown")
+   document.querySelector(".sm_menus").style.display="none"
+   })
+   document.querySelector(".close").addEventListener('click',()=>{
+       document.querySelector(".login_overlay").style.display="none"
+   }) 
+
+}
+catch{
+
+}
+
+
+try{
+    let a;
+    let b=document.getElementsByClassName("open_wish");
+    for (a=0;a<b.length;a++){
+        b[a].addEventListener('click',()=>{
+       document.querySelector(".close_wishDiv").style.display="block"
+       document.querySelector(".sm_menus").classList.remove("animate__slideInDown")
+       document.querySelector(".sm_menus").style.display="none"
+   })
+    }
+
+}
+catch{}
+
+
+ try{
+   document.querySelector("#close_wish").addEventListener('click',()=>{
+       document.querySelector(".close_wishDiv").style.display="none"
+   })
+   
+ }
+ catch{}
+
+ //for message
+ try{
+    document.querySelector(".rem").addEventListener('click',()=>{
+    document.querySelector(".common").style.display="none"
+})
+}
+catch{}
+
+try{
+
+  box=document.querySelector('.item_menus i')
+  itm = document.querySelector(".sm_menus")
+ 
+    box.addEventListener('click',()=>{
+  check=itm.classList.contains("animate__slideInDown")
+
+        if(check){
+    itm.style.display="none"
+    itm.classList.remove("animate__slideInDown")
+    itm.classList.add("animate__bounceOutDown")
+  }
+  else{
+    itm.style.display="block"
+    itm.classList.remove("animate__bounceOutDown")
+    itm.classList.add("animate__slideInDown")
+  }
+
+    }) 
+}
+catch{}
+
+ 
+    $(".add-to-cart").click(function() {
+      var btn = $(this).attr("data-pid");
+      url = "{%url "add"%}?id="+btn
+      fetch(url)
+      .then(response=>response.json())
+      .then((data)=>{
+        
+        document.querySelector(".item_indicator").innerHTML=data.size
+        document.querySelector("#cart_count").innerHTML=data.size
+        document.querySelector(".success").style.display="flex"
+        document.querySelector(".msg").innerHTML=data.msg
+          })
+    }); 
+
+    $(".quantity-add").click(function() {
+      var btn = $(this).attr("data-pid");
+      url = "{%url "add"%}?id="+btn+"&dec=1"
+    
+      fetch(url)
+      .then(response=>response.json())
+      .then((data)=>{
+        this.parentNode.parentNode.parentNode.children[3].children[0].innerHTML=data.subtotal
+        this.parentNode.children[1].innerHTML=data.qty
+        document.querySelector(".cart_total").innerHTML=data.total
+
+    if(!data.msg==""){
+        document.querySelector(".success").style.display="flex"
+        document.querySelector(".msg").innerHTML=data.msg
+    }
+        
+
+          })
+    }); 
+
+
+    $(".quantity-minus").click(function() {
+      var btn = $(this).attr("data-pid");
+      url = "{%url "add"%}?id="+btn+"&dec=0"
+      fetch(url)
+      .then(response=>response.json())
+      .then((data)=>{
+        this.parentNode.children[1].innerHTML=data.qty
+        this.parentNode.parentNode.parentNode.children[3].children[0].innerHTML=data.subtotal
+        document.querySelector(".cart_total").innerHTML=data.total
+
+        if(!data.msg==""){
+        document.querySelector(".success").style.display="flex"
+        document.querySelector(".msg").innerHTML=data.msg
+    }
+
+
+          })
+    }); 
+
+
+    $(".remove-from-cart").click(function() {
+      var btn = $(this).attr("data-pid");
+      url = "{%url "add"%}?id="+btn+"&dec=-"
+      fetch(url)
+      .then(response=>response.json())
+      .then((data)=>{
+        this.parentNode.parentNode.parentNode.parentNode.parentNode.style.display="None"
+        
+        document.querySelector("#cart_count").innerHTML=data.size
+        document.querySelector("#cart_count2").innerHTML=data.size
+        document.querySelector(".success").style.display="flex"
+        document.querySelector(".msg").innerHTML=data.msg
+        document.querySelector(".cart_total").innerHTML=data.total
+          })
+    }); 
+
+      
+    
+</script>
+     {%block js%}
+     {%endblock js%}
+</body>
+</html>

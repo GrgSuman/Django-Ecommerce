@@ -1,0 +1,1 @@
+web: gunicorn ElectroShop.wsgi --log-file -

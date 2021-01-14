@@ -1,0 +1,181 @@
+{%extends "base.html"%}
+
+{%block style%}
+<style>
+
+.top_show_info{
+        height:100px;
+        align-items: center;
+        background-color: #373f50;
+        padding:30px 8%;
+        display: flex;
+        justify-content: space-between;
+    }
+    .top_show_info h2{
+        font-family: 'Poppins',sans-serif;
+       color: white;
+       line-height: 1.8em;
+    }
+    .top_show_info p{
+        font-family: 'Rubik';
+        color: rgba(255, 255, 255, 0.753);
+        letter-spacing: 0.05em;
+    }
+    .top_show_info a{
+        color: white;
+    }
+
+
+.head_cart{
+        display: flex;
+       justify-content: space-between;
+       border-bottom: 2px solid #e3e9ef;
+
+    }
+    .current_{
+    transition: .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    padding: 5px 10px;
+
+}
+
+.current_:hover{
+    cursor: pointer;
+    transition: .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.search_res{
+    width: 60%;
+    margin: 40px auto;
+}
+.s__{
+    margin: 20px 0;
+}
+.s__:hover{
+    cursor: pointer;
+    color: dodgerblue;
+}
+.head_cart{
+        display: flex;
+       justify-content: space-between;
+       border-bottom: 2px solid #e3e9ef;
+
+    }
+    .current_{
+    transition: .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    padding: 5px 10px;
+
+}
+
+.current_:hover{
+    cursor: pointer;
+    transition: .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+@media(max-width: 1200px){
+    .search_res{
+        width: 80%;
+    }
+}
+
+@media(max-width: 1070px){
+    .top_show_info{
+        height: 100px;
+        align-items: center;
+    }
+
+}
+@media(max-width:700px){
+    .search_res{
+        width: 90%;
+    }
+}
+
+
+@media(max-width:550px){
+    .top_show_info{
+        height: 100px;
+        align-items: flex-start;
+        flex-direction: column;
+}
+.top_show_info h2{
+    margin: 0;
+}
+}
+@media(max-width:500px){
+    .view_product{
+        display: block!important;
+    }
+    .btn__{
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 10px 15px!important;
+        margin: 20px 0;
+    }
+    .search_res{
+        margin: 27px 2%;
+    }
+    .head_cart h2{
+        font-size: 1.3rem;
+    }
+
+}
+</style>
+{%endblock%}
+
+
+
+
+{%block content%}
+{%load static%}
+
+<div class="top_show_info">
+    <h2>Category</h2>
+    <p><a href="{%url "index"%}"><i class="fas fa-home"></i> Home</a>  >category-products</p>
+   </div>
+
+
+<div class="search_res">
+
+    <div class="head_cart">
+        <h2><span style="margin-right:10px" class="current_"> Products</span></h2>
+        <h2 class="c_len">Items: {{object_list.count}}</h2>
+    </div>
+
+
+
+    {%for item in object_list%}
+    <section class="view_product" style="display: flex; justify-content: space-between;margin:80px 20px;">
+        <span style="display: flex; align-items: flex-start;">
+            <a href="{%url "more" item.id%}">
+                <img style="height: 100px; width:120px;" src="{%static item.img_link%}" alt="">
+            </a>
+           
+            <div style="margin-left:20px;">
+                <a href="{%url "more" item.id%}">
+                    <p style="margin: 0;" >{{item.name}}</p>
+                </a>
+                <p style="margin:20px 0;font-size: 14px;" >Rs. {{item.price}}</p>
+                <p class="cat__" style="font-size: 14px;">{{item.category}}</p>
+            </div>
+        </span>
+
+        <span>
+            <a class="btn__" href="{%url "more" item.id%}" style="color: white;background-color: #fe696a;padding: 8px 15px; border-radius: 5px;font-size: 14px;">
+                View
+            </a>
+        </span>
+        
+    </section>
+    {%endfor%}
+
+
+<h3 style="margin-top: 40px;"><a href="{%url "index"%}"><i class="fas fa-arrow-left" style="font-weight: normal;margin-right: 5px;"></i> Continue Shopping</a></h2>
+
+    
+</div>
+
+</div>
+
+
+
+{%endblock content%}
+

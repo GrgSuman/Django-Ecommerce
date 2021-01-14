@@ -1,0 +1,857 @@
+{%extends "base.html"%}
+{%load static%}
+{%block style%}
+<style>
+    .owl-dots {
+        position: absolute;
+        bottom: 60px;
+        left: 49%;
+        display: flex !important;
+        justify-content: center !important;
+    }
+
+    .owl-carousel span {
+        width: 10px;
+        height: 10px;
+        margin: 5px 7px;
+        background: #fe696a !important;
+        display: block;
+        -webkit-backface-visibility: visible;
+        -webkit-transition: opacity 200ms ease;
+        -moz-transition: opacity 200ms ease;
+        -ms-transition: opacity 200ms ease;
+        -o-transition: opacity 200ms ease;
+        transition: opacity 200ms ease;
+        -webkit-border-radius: 30px;
+        -moz-border-radius: 30px;
+        border-radius: 30px;
+        outline: none;
+        border: none;
+    }
+
+    .owl-dot {
+        outline: none !important;
+        border: none !important;
+    }
+
+    .owl-carousel .active span {
+        width: 20px;
+        height: 10px;
+        margin: 5px 7px;
+        display: block;
+        -webkit-backface-visibility: visible;
+        -webkit-transition: opacity 200ms ease;
+        -moz-transition: opacity 200ms ease;
+        -ms-transition: opacity 200ms ease;
+        -o-transition: opacity 200ms ease;
+        transition: opacity 200ms ease;
+        -webkit-border-radius: 30px;
+        -moz-border-radius: 30px;
+        border-radius: 30px;
+    }
+
+    .product_div:hover {
+        box-shadow: 0px 0px 13px -1px rgba(0, 0, 0, 0.19);
+        /* cursor: pointer; */
+    }
+
+    .product_div:hover>.bottom_cart a {
+        display: flex;
+    }
+
+    .product_div {
+        padding: 20px 16px;
+        padding-top: 10px;
+        width: 290px;
+    }
+
+    .image_product {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 200px;
+
+    }
+
+    .image_product img {
+        height: 190px;
+        width: 165px;
+    }
+
+    .pro_ct a {
+        color: rgba(0, 0, 0, 0.671);
+        transition: .2s linear;
+    }
+
+    .pro_ct a:hover {
+        color: black;
+        transition: .2s linear;
+
+    }
+
+    .pro_nm a {
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.822);
+        letter-spacing: 0.04em;
+        font-weight: bold;
+        transition: .2s linear;
+
+    }
+
+    .pro_nm a:hover {
+        color: black;
+        transition: .2s linear;
+
+    }
+
+    .pro_flx {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .bottom_cart {
+        height: 30px;
+    }
+
+    .bottom_cart a {
+        display: none;
+        justify-content: center;
+        margin: 0;
+        background-color: #fe696a;
+        padding: 9px;
+        border-radius: 5px;
+        color: white;
+        font-size: 14px;
+    }
+
+    .bottom_cart a:hover {
+        background-color: #fe4344;
+    }
+
+    .pro_price a {
+        color: #4e54c8;
+        letter-spacing: 0.09em;
+    }
+
+    .top_info {
+        width: 100%;
+        position: relative;
+        top: 0;
+    }
+
+    .top_info .sale {
+        color: white;
+        background-color: #f34770;
+        padding: 3px 8px;
+        font-size: 12px;
+        font-family: 'Montserrat';
+        box-shadow: 0 0.5rem 1.125rem -0.275rem rgba(243, 71, 112, 0.9);
+        border-radius: 3px;
+        margin-right: 5px;
+    }
+
+    .top_info .new {
+        color: white;
+        background-color: #69b3fe;
+        padding: 3px 8px;
+        font-size: 12px;
+        font-family: 'Montserrat';
+        box-shadow: 0 0.5rem 1.125rem -0.275rem rgba(105, 179, 254, 0.9);
+        border-radius: 3px;
+    }
+
+    .top_info i {
+        position: absolute;
+        right: 0;
+        top: 0;
+        font-size: smaller;
+        padding: 10px;
+        border-radius: 50%;
+        background-color: #f3f5f9;
+        color: rgba(0, 0, 0, 0.795);
+    }
+
+    .top_info i:hover {
+        color: black;
+        cursor: pointer;
+
+    }
+
+    .top_info a:hover~.chip {
+        display: block;
+        transition: .3s ease-in-out;
+
+    }
+
+    .chip {
+        position: absolute;
+        right: 15%;
+        color: rgba(255, 255, 255, 0.884);
+        background-color: rgba(0, 0, 0, 0.712);
+        padding: 10px 15px;
+        border-radius: 10px;
+        font-size: small;
+        top: -10px;
+        display: none;
+        transition: .3s ease-in-out;
+    }
+
+    .grid_products {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        margin: 50px 8%;
+    }
+
+    .heading_pro {
+        margin: 50px 8%;
+        margin-bottom: 0px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #e3e9ef !important;
+        padding-bottom: 10px;
+    }
+
+    .heading_pro a {
+        font-size: small;
+        padding: 10px 15px;
+        color: blueviolet;
+        border: 1px solid blueviolet;
+        border-radius: 3px;
+        transition: .3s ease-in-out;
+    }
+
+    .heading_pro a:hover {
+        transition: .3s ease-in-out;
+        background-color: rgba(105, 179, 254, 0.9);
+        border: 1px solid rgba(105, 179, 254, 0.9);
+        color: white;
+
+    }
+
+    .carousel_show {
+        position: relative;
+        background-color: #f6f9fc;
+
+    }
+
+    .single_hero {
+        margin: 20px 12%;
+        height: 500px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+    }
+
+    .detail {
+        margin-top: -50px;
+        margin-right: 10px;
+    }
+
+    .detail p {
+        font-family: 'Montserrat';
+        margin: 40px 0;
+        font-size: 18px;
+        color: rgba(0, 0, 0, 0.849);
+        line-height: 1.6em;
+    }
+
+    .detail button {
+        font-family: 'Montserrat', sans-serif;
+        color: white;
+        background-color: #fe696a;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 0.5rem 1.125rem -0.5rem rgba(254, 105, 106, 0.9);
+        outline: none;
+        transition: .3s linear;
+    }
+
+    .detail button:hover {
+        cursor: pointer;
+        transition: .3s linear;
+    }
+
+    .detail h1 {
+        font-family: 'Poppins', sans-serif;
+        font-size: 2rem;
+    }
+
+    .image {
+        display: flex;
+    }
+
+    .image img {
+        height: 300px;
+        width: 300px;
+    }
+
+    .rem {
+        color: rgba(255, 255, 255, 0.829);
+    }
+
+    .rem:hover {
+        color: white;
+        cursor: pointer;
+    }
+
+    .div_carousel {
+        padding: 30px 8%;
+        position: relative;
+    }
+
+    .owl-prev {
+        position: absolute;
+        top: 50%;
+        left: -20px;
+        outline: none;
+        border: none;
+        font-size: 20px;
+        background-color: #f3f5f9;
+        padding: 10px;
+        border-radius: 50%;
+    }
+
+    .owl-next {
+        position: absolute;
+        top: 50%;
+        right: -20px;
+        outline: none;
+        border: none;
+    }
+
+    .add_item:hover {
+        cursor: pointer;
+    }
+
+    .slick-prev:before,
+    .slick-next:before {
+        color: black !important;
+    }
+
+    .s_products {
+        margin: 20px 8%;
+        padding: 40px 0;
+    }
+
+    .slick-slide:focus {
+        outline: none !important;
+    }
+
+
+    /* Responsive */
+
+  @media(max-width:1300px){
+      .grid_products{
+          grid-template-columns: 1fr 1fr 1fr;
+      }
+  }
+
+  @media(max-width:1100px){
+      .heading_pro{
+          margin: 50px 5%;
+      }
+      .grid_products{
+          margin: 50px 5%;
+      }
+  }
+
+
+
+    @media(max-width: 1070px) {
+        .heading_pro{
+          margin: 20px 5%;
+      }
+
+        .detail p {
+            margin: 30px 0;
+        }
+
+        .detail h1 {
+            font-size: 1.5rem;
+        }
+
+        .image img {
+            height: 260px;
+        }
+
+        .grid_products{
+          margin: 50px 10%;
+          grid-template-columns: 1fr 1fr;
+
+      }
+      .product_div {
+       width: 80%;
+}
+    }
+
+    @media(max-width:920px){
+      .grid_products{
+          margin: 50px 5%;
+          margin-right: 0;
+      }
+  }
+
+ @media(max-width: 830px) {
+
+.single_hero{
+    margin: 20px 8%;
+}
+}
+@media(max-width:720px){
+      .grid_products{
+          grid-template-columns: 1fr;
+          margin: 50px 20%;
+      }
+  }
+@media(max-width: 700px) {
+
+.detail p{display: none;}
+.detail{margin-top: 0;}
+.single_hero{
+    flex-direction: column-reverse;
+ height: 470px;
+ align-items: start;
+ padding: 20px 0;
+}
+.image{
+    justify-content: center;
+}
+.detail h1{
+    margin: 2rem 0;
+    margin-top: 0;
+    }
+.owl-carousel .owl-item img {
+    display: block;
+    width: 50%;
+}
+
+.s_products{
+    margin: 0 8%;
+    padding: 0;
+}
+}
+
+@media(max-width:650px){
+      .grid_products{
+          grid-template-columns: 1fr;
+          margin: 50px 10%;
+          margin-right: 0;
+      }
+  }
+
+@media(max-width: 550px){
+    .owl-dots {
+        display: none!important;
+    }
+
+    .single_hero{
+        height: 400px;
+    }
+    .image img{
+        height: 190px;
+    }
+    .detail h1{
+        margin: 2rem 0;
+    }
+
+   
+}
+
+
+@media(max-width: 450px){
+    .s_products h2{
+        margin: 20px 0!important;
+        font-size: 1.3rem;
+    }
+
+  
+    .single_hero{
+        height: 375px;
+    }
+    .image img{
+        height: 190px;
+    }
+    .detail h1{
+        font-size: 1.1rem;
+    }
+    .owl-carousel .owl-item img {
+    display: block;
+    width: 70%;
+}
+
+@media(max-width:400px){
+    .heading_pro a{display: none;}
+}
+
+   
+}
+</style>
+{%endblock%}
+{%block content%}
+
+{%if not user.is_authenticated%}
+<script>
+    alert("For testing - username=Demouser, password=admin123")
+</script>
+{%endif%}
+
+
+<div class="owl-carousel carousel_show ">
+
+    <div class="single_hero">
+        <section class="detail">
+            <h1>LG OLED UHD TV AI ThinQ</h1>
+            <p>Now, let’s speak of the star of the show, the LG OLED UHD TVs. With their infinite contrast ratio, you
+                won’t find darker darks and whiter whites in other display panels.</p>
+            <a href="{%url "more" 12%}"><button>Buy Now <i class="fas fa-chevron-right"></i></button></a>
+        </section>
+
+        <section class="image">
+            <img src="{% static "images/5.png" %}" alt="">
+        </section>
+    </div>
+
+    <div class="single_hero">
+        <section class="detail">
+            <h1>Amazon ECHO DOT (3RD GEN) Wired & Bluetooth Smart Speaker ( Black )</h1>
+            <p>Amazon most popular smart speaker with 360 degree sound
+                Just ask Alexa for music, news, trivias, scores, weather, alarms ...</p>
+            <a href="{%url "more" 15%}"><button>Buy Now <i class="fas fa-chevron-right"></i></button></a>
+        </section>
+
+        <section class="image">
+            <img src="{% static "images/2.png" %}" alt="">
+        </section>
+    </div>
+
+
+    <div class="single_hero">
+        <section class="detail">
+            <h1>Beats EP on-ear headphones deliver masterfully tuned sound for any music lover</h1>
+            <p>Find your perfect fit with adjustable vertical sliders for ultimate comfort. The sleek, durable frame is
+                reinforced with lightweight stainless steel to keep wear easy.</p>
+            <a href="{%url "more" 5%}"><button>Buy Now <i class="fas fa-chevron-right"></i></button></a>
+        </section>
+
+        <section class="image">
+            <img src="{% static "images/3.png" %}" alt="">
+        </section>
+    </div>
+
+</div>
+
+
+
+<div class="heading_pro">
+    <h2 id="content">Trending Products <span></span> </h2>
+    <a>More Products <i class="fas fa-chevron-right"></i></a>
+</div>
+
+<div class="grid_products">
+    {%for product in random%}
+
+    <div class="product_div">
+
+        <section class="top_info">
+            <p style="height: 10px;">
+                {%if product.isInSale%}
+                <a class="sale">Sale</a>
+                {%endif%}
+                {%if product.isNew%}
+                <a class="new">New</a>
+                {%endif%}
+            </p>
+            <a href="{%url "addWish" product.id%}">
+                <i class="far fa-heart"></i>
+            </a>
+            <p class="chip">Add to wishlist</p>
+        </section>
+
+        <section class="top_card">
+
+            <div class="image_product">
+                <a href="{%url "more" product.id%}">
+                    <img src="{%static product.img_link%}" alt="product image">
+                </a>
+            </div>
+
+            <div class="detail_product">
+
+                <p class="pro_ct"><a style="font-size:smaller;" href="">{{product.category}}</a></p>
+
+                <p class="pro_nm"><a href="{%url "more" product.id%}">{{product.name}}</a></p>
+
+                <section class="pro_flx">
+                    <p class="pro_price">
+                        {%if product.final_price > 0 %}
+                        <a
+                            style="font-size: small;text-decoration: line-through; color: rgba(0, 0, 0, 0.829); margin-right: 5px;">Rs.{{product.price}}</a>
+                        <a>Rs.{{product.final_price}}</a>
+                        {%else%}
+                        <a>Rs.{{product.price}}</a>
+                        {%endif%}
+                    </p>
+                </section>
+
+            </div>
+
+        </section>
+
+        <section class="bottom_cart">
+            {%if product.inStock %}
+            {%if user.is_authenticated %}
+            <a data-pid="{{product.id}}" id="{{product.id}}" class="add-to-cart"><i class="fas fa-shopping-cart"
+                    style="margin: 0 5px;"></i> Add to Cart</a>
+
+            {%else%}
+            <a class="add_item"><i class="fas fa-shopping-cart" style="margin: 0 5px;"></i> Add to Cart</a>
+            {%endif%}
+            {%else%}
+            <a style="color: black; background-color: #d9dee9;"><i class="fas fa-shopping-cart"
+                    style="margin: 0 5px;"></i>Out of Stock</a>
+            {%endif%}
+        </section>
+
+
+    </div>
+
+    {%endfor%}
+</div>
+
+
+<div class="s_products">
+
+
+    <h2 style="margin: 40px 0;">Some popular Smartphones</h2>
+
+    <div class="slider">
+
+        {%for product in watchs%}
+
+
+
+        <div class="product_div">
+
+            <section class="top_info">
+                <p style="height: 10px;">
+                    {%if product.isInSale%}
+                    <a class="sale">Sale</a>
+                    {%endif%}
+                    {%if product.isNew%}
+                    <a class="new">New</a>
+                    {%endif%}
+                </p>
+                <a href="{%url "addWish" product.id%}">
+                    <i class="far fa-heart"></i>
+                </a>
+                <p class="chip">Add to wishlist</p>
+            </section>
+
+            <section class="top_card">
+
+                <div class="image_product">
+                    <a href="{%url "more" product.id%}">
+                        <img src="{%static product.img_link%}" alt="product image">
+                    </a>
+                </div>
+
+                <div class="detail_product">
+
+                    <p class="pro_ct"><a style="font-size:smaller;" href="">{{product.category}}</a></p>
+
+                    <p class="pro_nm"><a href="{%url "more" product.id%}">{{product.name}}</a></p>
+
+                    <section class="pro_flx">
+                        <p class="pro_price">
+                            {%if product.final_price > 0 %}
+                            <a
+                                style="font-size: small;text-decoration: line-through; color: rgba(0, 0, 0, 0.829); margin-right: 5px;">Rs.{{product.price}}</a>
+                            <a>Rs.{{product.final_price}}</a>
+                            {%else%}
+                            <a>Rs.{{product.price}}</a>
+                            {%endif%}
+                        </p>
+                    </section>
+
+
+
+                </div>
+
+            </section>
+
+            <section class="bottom_cart">
+                {%if product.inStock %}
+                {%if user.is_authenticated %}
+                <a data-pid="{{product.id}}" id="{{product.id}}" class="add-to-cart"><i class="fas fa-shopping-cart"
+                        style="margin: 0 5px;"></i> Add to Cart</a>
+
+                {%else%}
+                <a class="add_item"><i class="fas fa-shopping-cart" style="margin: 0 5px;"></i> Add to Cart</a>
+                {%endif%}
+                {%else%}
+                <a style="color: black; background-color: #d9dee9;"><i class="fas fa-shopping-cart"
+                        style="margin: 0 5px;"></i>Out of Stock</a>
+                {%endif%}
+            </section>
+
+        </div>
+        {%endfor%}
+
+    </div>
+</div>
+
+
+
+<div class="s_products">
+
+
+    <h2 style="margin: 40px 0;">Awesome music with awesome Headphones</h2>
+
+    <div class="slider">
+
+        {%for product in headphones%}
+
+
+
+        <div class="product_div">
+
+            <section class="top_info">
+                <p style="height: 10px;">
+                    {%if product.isInSale%}
+                    <a class="sale">Sale</a>
+                    {%endif%}
+                    {%if product.isNew%}
+                    <a class="new">New</a>
+                    {%endif%}
+                </p>
+                <a href="{%url "addWish" product.id%}">
+                    <i class="far fa-heart"></i>
+                </a>
+                <p class="chip">Add to wishlist</p>
+            </section>
+
+            <section class="top_card">
+
+                <div class="image_product">
+                    <a href="{%url "more" product.id%}">
+                        <img src="{%static product.img_link%}" alt="product image">
+                    </a>
+                </div>
+
+                <div class="detail_product">
+
+                    <p class="pro_ct"><a style="font-size:smaller;" href="">{{product.category}}</a></p>
+
+                    <p class="pro_nm"><a href="{%url "more" product.id%}">{{product.name}}</a></p>
+
+                    <section class="pro_flx">
+                        <p class="pro_price">
+                            {%if product.final_price > 0 %}
+                            <a
+                                style="font-size: small;text-decoration: line-through; color: rgba(0, 0, 0, 0.829); margin-right: 5px;">Rs.{{product.price}}</a>
+                            <a>Rs.{{product.final_price}}</a>
+                            {%else%}
+                            <a>Rs.{{product.price}}</a>
+                            {%endif%}
+                        </p>
+                    </section>
+
+
+
+                </div>
+
+            </section>
+
+            <section class="bottom_cart">
+                {%if product.inStock %}
+                {%if user.is_authenticated %}
+                <a data-pid="{{product.id}}" id="{{product.id}}" class="add-to-cart"><i class="fas fa-shopping-cart"
+                        style="margin: 0 5px;"></i> Add to Cart</a>
+                {%else%}
+                <a class="add_item"><i class="fas fa-shopping-cart" style="margin: 0 5px;"></i> Add to Cart</a>
+                {%endif%}
+                {%else%}
+                <a style="color: black; background-color: #d9dee9;"><i class="fas fa-shopping-cart"
+                        style="margin: 0 5px;"></i>Out of Stock</a>
+                {%endif%}
+            </section>
+
+        </div>
+        {%endfor%}
+
+    </div>
+</div>
+
+
+
+{%endblock content%}
+
+
+{%block js%}
+
+<script>
+    $('.slider').slick({
+        infinite: true,
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 2,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        arrows: true,
+        prevArrow: '<div class="slick-prev"><i class="fas fa-arrow-left" aria-hidden="true"></i></div>',
+        nextArrow: '<div class="slick-next"><i class="fas fa-arrow-right" aria-hidden="true"></i></div>',
+        responsive: [{
+           
+            breakpoint: 1300,
+            settings: {
+                slidesToShow: 3,
+                slidesToScroll: 1
+            }
+        },
+        {
+            breakpoint: 950,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1
+            }
+        },
+        {
+            breakpoint: 700,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+        }
+        
+        ]
+    });
+
+    item = document.getElementsByClassName('add_item')
+    let i = 0
+    for (i = 0; i < item.length; i++) {
+        item[i].addEventListener('click', () => {
+            document.querySelector(".login_overlay").style.display = "flex"
+        })
+    }
+
+    $('.owl-carousel').owlCarousel({
+        loop: true,
+        margin: 0,
+        nav: false,
+        items: 1,
+        dots: true,
+        autoplay: true,
+        autoplayTimeout: 7000,
+        autoplaySpeed: 2000
+    })
+
+
+
+
+
+</script>
+
+{%endblock js%}

@@ -1,0 +1,253 @@
+{%extends "base.html"%}
+
+{%block style%}
+<style>
+ .top_show_info{
+        height:100px;
+        align-items: center;
+        background-color: #373f50;
+        padding:30px 8%;
+        display: flex;
+        justify-content: space-between;
+    }
+    .top_show_info h2{
+        font-family: 'Poppins',sans-serif;
+       color: white;
+       line-height: 1.8em;
+    }
+    .top_show_info p{
+        font-family: 'Rubik';
+        color: rgba(255, 255, 255, 0.753);
+        letter-spacing: 0.05em;
+    }
+    .top_show_info a{
+        color: white;
+    }
+
+    .cart_details{
+        display:flex;
+        margin: 20px 8%;
+    }
+   
+    .cart_details h2{
+        font-family: 'Poppins';
+        font-weight:normal;
+        font-size:20px;
+        padding-bottom: 20px;
+       border-bottom: 2px solid #e3e9ef;
+    }
+    .iter{
+       border-bottom: 2px solid #e3e9ef;
+    }
+    .cart_main{
+        margin: 20px 0;
+        padding: 10px 20px;
+       flex: 1;
+       box-shadow: 0px 2px 6px 0px rgb(0 0 0 / 20%);
+       background-color: floralwhite;
+      
+    }
+
+    .cart_side{
+       padding: 10px 50px;
+       flex: 2;
+       margin: 20px 30px;
+       box-shadow: 0px 2px 6px 0px rgb(0 0 0 / 20%);
+    }
+
+    .promo input{
+    width:calc(100% - 20px);
+    padding: 8px 10px;
+    font-size: .9375rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #4b566b;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #dae1e7;
+    font-family: "Montserrat";
+    border-radius: .3125rem;
+    box-shadow: 0 0 0 0 transparent;
+    transition: border-color 0.2s ease-in-out,box-shadow 0.2s ease-in-out;
+    margin:15px 0;
+    }
+
+    .promo input:focus{
+    color: #4b566b;
+    background-color: #fff;
+    border-color: rgba(254,105,106,0.3);
+    outline: 0;
+    transition: .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-shadow: 0 0 0 0 transparent, 0 0.375rem 0.625rem -0.3125rem rgba(254,105,106,0.15);
+ }
+
+#btn{
+    width: 100%;
+     padding: 12px 15px;
+     margin: 15px 0;
+     border: none;
+     outline: none;
+     font-size: 14px;
+     background-color:dodgerblue;
+     font-family: 'Rubik';
+     color: white;
+     transition: .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+}
+#btn:hover{
+    cursor: pointer;
+    box-shadow: 0 0.5rem 1.125rem -0.5rem rgba(254,105,106,0.9);
+    transition: .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+}
+
+
+
+
+
+
+@media(max-width: 1240px){
+    .cart_details{
+        margin: 30px 1%;
+    }
+}
+@media(max-width: 1070px){
+    .top_show_info{
+        height: 100px;
+        align-items: center;
+    }
+
+    .cart_side {
+    padding: 10px 20px;
+    margin: 42px 0;
+    box-shadow: 0px 2px 6px 0px rgb(0 0 0 / 20%);
+}
+.cart_details{
+    display: block;
+    margin: 30px 8%;
+
+}
+}
+
+@media(max-width:550px){
+    .top_show_info{
+        height: 100px;
+        align-items: flex-start;
+        flex-direction: column;
+}
+.top_show_info h2{
+    margin: 0;
+}
+}
+
+
+</style>
+{%endblock%}
+
+
+
+
+{%block content%}
+
+<div class="top_show_info">
+    <h2>Order Confirmation</h2>
+    <p><a href="{%url "index"%}"><i class="fas fa-home"></i> Home</a>  > checkout</p>
+   </div>
+
+{%if cartItem and user.is_authenticated %}
+
+<div class="cart_details">
+
+<section class="cart_side">
+    <div class="head_cart">
+        <h2>Billing Details</h2>
+    </div>
+
+
+    <section style="display: flex;justify-content: space-between;">
+        <h4>Order Status</h4>
+        <h4>Not Ordered</h4>
+    </section>
+
+    <!-- <p style="margin-bottom: 15px;" class="toggle_promo">Please fill the below form for order</p> -->
+    <form action="{%url "checkout"%}" method="POST" class="promo">
+        {%csrf_token%}
+        <input type="text" placeholder="Enter shipping address" name="address">
+        <input type="text" placeholder="Phone number" name="phone">
+        <section style="display: flex;justify-content: space-between;">
+            <h4>Total :</h4>
+            <h4>Rs.{{total}}</h4>
+        </section>
+        <button id="btn">ORDER</button>
+    </form>
+
+</section>
+
+<section class="cart_main">
+    
+    <h2>Order Summary</h2>
+
+    <div class="iter">
+        {%for item in cartItem%}
+
+    <section style="display: flex;justify-content: space-between;">
+        <h4>{{forloop.counter}}. {{item.product.name}} </h4>
+        <h4>qty:{{item.quantity}}</h4>
+    </section>
+    {%endfor%}
+    </div>
+    
+
+    <section style="display: flex;justify-content: space-between;">
+        <h4>Total Items</h4>
+        <h4>{{cart}}</h4>
+    </section>
+    
+    </section>
+    
+    
+</div>
+
+<h3 style="margin-top: 40px;text-align: center;"><a href="{%url "index"%}"><i class="fas fa-arrow-left" style="font-weight: normal;margin-right: 5px;"></i> Continue Shopping</a></h2>
+
+
+
+{%else%}
+
+<div style="display: flex;justify-content: center;
+align-items: center; flex-direction: column;">
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<lottie-player src="https://assets7.lottiefiles.com/packages/lf20_dkc8tvbm.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop  autoplay></lottie-player>
+<h3 style="margin-top: 40px;"><a href="{%url "index"%}"><i class="fas fa-arrow-left" style="font-weight: normal;margin-right: 5px;"></i> Continue Shopping</a></h2>
+</div>
+
+{%endif%}
+
+
+
+
+{%endblock content%}
+
+
+
+
+{%block js%}
+<script>
+
+    var btn=document.getElementById("btn")
+    btn.addEventListener("click",()=>{
+        
+        var isAuthenticated=btn.getAttribute("data-isAuthenticated")
+        if(isAuthenticated!=="AnonymousUser"){
+            window.location.href="/checkout"
+        }
+        else{
+            window.location.href="/register"
+        }
+    })
+    
+
+</script>
+
+
+{%endblock js%}

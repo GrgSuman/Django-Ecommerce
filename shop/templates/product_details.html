@@ -1,0 +1,504 @@
+{%extends "base.html"%}
+
+{%block style%}
+<style>
+    .top_show_info{
+        height:150px;
+        background-color: #373f50;
+        padding:30px 8%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .top_show_info h2{
+        font-family: 'Poppins',sans-serif;
+       color: white;
+       line-height: 1.8em;
+    }
+    .top_show_info p{
+        font-family: 'Rubik';
+        color: rgba(255, 255, 255, 0.753);
+        letter-spacing: 0.05em;
+    }
+    .top_show_info a{
+        color: white;
+    }
+    .product_container{
+        margin: 30px 8%;
+        margin-top: -5%;
+        padding: 10px 20px;
+        border-radius: 15px;
+        box-shadow: 0px 0px 13px -1px rgba(0,0,0,0.19);
+        background: white;
+
+    }
+    .product_container .head{
+        padding-bottom: 20px;
+        border-bottom: 1px solid #8d949c4a;
+        
+    }
+    .product_container div{
+        display:flex;
+        justify-content: space-between;
+        padding: 30px;
+    }
+    .img_detail{
+        flex: 1;
+        /* padding: 20px 30px; */
+    }
+    .img_detail img{
+        width:60%;
+        height:300px;
+        margin: 20px 20%;
+       
+    }
+    .detail_products{
+        margin: 20px;
+        flex: 1;
+    }
+    .detail_products p{
+       font-family: 'Montserrat',sans-serif;
+       line-height: 1.6em;
+    }
+    .price_d{
+        font-weight: normal;
+        letter-spacing: 0.06em;
+        color: blueviolet;
+    }
+    .add_{
+            font-family: 'Montserrat',sans-serif;
+            color: white;
+            background-color: #fe696a;
+            padding: 10px 20px;
+            border-radius: 5px;
+        transition: .3s linear;
+
+    }
+    .add_:hover{
+        transition: .3s linear;
+        box-shadow: 0 0.5rem 1.125rem -0.5rem rgba(254,105,106,0.9);
+
+    }
+    .product_container span{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* related */
+
+    
+    .product_div:hover{
+        box-shadow: 0px 0px 13px -1px rgba(0,0,0,0.19);
+        /* cursor: pointer; */
+    }
+    .product_div:hover > .bottom_cart a{
+        display:flex;
+    }
+    .product_div{
+       padding: 20px 16px;
+       padding-top: 10px;
+       width: 290px;
+    }
+
+    .image_product{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+       height: 200px;
+        
+    }
+    .image_product img{
+       height:190px;
+       width: 165px;
+    }
+    .pro_ct a{
+        color: rgba(0, 0, 0, 0.671);
+        transition: .2s linear;
+    }
+    .pro_ct a:hover{
+        color: black;
+        transition: .2s linear;
+       
+    }
+    .pro_nm a{
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.822);
+        letter-spacing: 0.04em;
+        font-weight: bold;
+        transition: .2s linear;
+
+    }
+    .pro_nm a:hover{
+        color:black ;
+        transition: .2s linear;
+
+    }
+    .pro_flx{
+        display: flex;
+        justify-content: space-between;
+    }
+    .bottom_cart{
+        height:30px;
+    }
+    .bottom_cart a{
+        display: none;
+        justify-content: center;
+        margin: 0;
+        background-color: #fe696a;
+        padding: 9px;
+        border-radius: 5px;
+        color: white;
+        font-size: 14px;
+    }
+    
+    .bottom_cart a:hover{
+        background-color: #fe4344;
+    }
+    .pro_price a{
+        color: #4e54c8;
+        letter-spacing: 0.09em;
+        }
+
+        .top_info{
+            width: 100%;
+            position: relative;
+            top: 0;
+        }
+      
+        .top_info .sale{
+            color: white;
+            background-color: #f34770;
+            padding: 3px 8px;
+            font-size: 12px;
+            font-family: 'Montserrat';
+            box-shadow: 0 0.5rem 1.125rem -0.275rem rgba(243,71,112,0.9);
+            border-radius: 3px;
+            margin-right: 5px;
+        }
+        .top_info .new{
+            color: white;
+            background-color: #69b3fe;
+            padding: 3px 8px;
+            font-size: 12px;
+            font-family: 'Montserrat';
+            box-shadow: 0 0.5rem 1.125rem -0.275rem rgba(105,179,254,0.9);
+            border-radius: 3px;
+        }
+        .top_info i{
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-size: smaller;
+            padding: 10px;
+            border-radius: 50%;
+            background-color: #f3f5f9;
+            color: rgba(0, 0, 0, 0.795);
+        }
+
+        .top_info i:hover{
+       color: black;
+       cursor: pointer;
+
+        }
+        .top_info a:hover ~ .chip{
+            display: block;
+            transition: .3s ease-in-out;
+
+        }
+        .chip{
+            position: absolute;
+            right:15%;
+            color: rgba(255, 255, 255, 0.884);
+            background-color: rgba(0, 0, 0, 0.712);
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-size:small;
+            top:-10px;
+            display: none;
+            transition: .3s ease-in-out;
+        }
+
+  
+        .div_carousel{
+            padding: 30px 8%;
+            position: relative;
+        }
+        .back_{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin:20px 0;
+        }
+        .owl-prev{
+            position: absolute;
+            top: 50%;
+            left:-20px;
+            outline: none;
+            border: none;
+            font-size: 20px;
+            background-color: #f3f5f9;
+            padding: 10px;
+            border-radius: 50%;
+        }
+        .owl-next{
+            position: absolute;
+            top: 50%;
+            right:-20px;
+            outline: none;
+            border: none;
+        }
+        .slick-prev:before,.slick-next:before{
+            color: black!important;
+        }
+        .s_products{
+            margin:20px 8%;
+            padding: 40px 0;
+        }
+        .slick-slide:focus { 
+            outline: none!important;
+             }
+
+
+             /* RESPONSIVE */
+
+             @media(max-width: 1025px){
+                 .img_detail img{
+                     height: 225px;
+                 }
+                 .product_container div{
+                     padding: 0;
+                 }
+                 .detail_products p{
+                     font-size: 14px;
+                     margin-bottom: 25px!important;
+                 }
+                 .add_{
+                     font-size: 13px;
+                 }
+                 .detail_products{
+                     margin: 0;
+                 }
+                 .product_container{
+                     margin: 0 15px;
+                     box-shadow: none;
+                 }
+             }
+
+             @media(max-width:650px){
+                 .img_detail img{
+                     width: 40%;
+                 }
+                 .product_container div{
+                     flex-direction: column;
+                 }
+             }
+             @media(max-width:550px){
+                .top_show_info{
+                    align-items: flex-start;
+                    flex-direction: column;
+                    height: 120px;
+                }
+             }
+
+             @media(max-width:520px){
+                 .img_detail img{
+                     width: 50%;
+                 }
+                .product_container .head{
+                    font-size: 1.3rem;
+                }
+             }
+             @media(max-width:450px){
+                 .img_detail img{
+                     width: 60%;
+                 }
+             }
+</style>
+{%endblock%}
+{%block content%}
+
+{%load static%}
+
+<div class="top_show_info">
+ <h2>Product Details</h2>
+ <p><a href="{%url "index"%}"><i class="fas fa-home"></i> Home</a>  > Product page( {{product.id}} )</p>
+</div>
+
+
+<div class="product_container">
+    <h2 class="head">{{product.name}}</h2>
+    <div>
+        <section class="img_detail"><img src="{%static product.img_link%}" alt=""></section>
+        <section class="detail_products">
+            {%if product.final_price > 0 %}
+            <a style="font-size: small;text-decoration: line-through; color: rgba(0, 0, 0, 0.829); margin-right: 5px;">Rs.{{product.price}}</a>
+            <h1 class="price_d"><a>Rs.{{product.final_price}}</a></h1>
+            {%else%}
+           <h1 class="price_d"> <a>Rs.{{product.price}}</a></h1>
+            {%endif%}
+
+            <p style="margin-bottom: 50px;">{{product.description}}</p>
+
+            {%if product.inStock %}
+            <span>
+            {%if user.is_authenticated%}
+            <a data-pid="{{product.id}}" id="{{product.id}}" class="add_ add-to-cart"><i class="fas fa-shopping-cart" style="margin: 0 5px;"></i> Add to Cart</a>
+
+            {%else%}
+            <a  class="add_ add_item"><i class="fas fa-shopping-cart" style="margin: 0 5px;"></i> Add to Cart</a>
+            {%endif%}
+            <p>Item in Stock <i class="far fa-check-circle"></i></p>
+            </span>
+            {%else%}
+            <span>
+            <a style="color: black; background-color: #d9dee9;" class="add_"><i class="fas fa-shopping-cart" style="margin: 0 5px;"></i>Out of Stock</a>
+            <p>Item in Stock <i class="far fa-times-circle" style="color: red;"></i></p>
+            {%endif%}
+             </span>
+        </section>
+    </div>
+
+</div>
+
+<div class="div_carousel">
+
+    <h2>You may also like</h2>
+
+
+
+    <div class="slider">
+       
+        {%for product in related%}
+        
+        
+        
+        <div class="product_div">
+        
+            <section class="top_info">
+                <p style="height: 10px;">
+                    {%if product.isInSale%}
+                    <a  class="sale">Sale</a>
+                    {%endif%}
+                    {%if product.isNew%}
+                    <a  class="new">New</a>
+                    {%endif%}
+                </p>
+                <a href="{%url "addWish" product.id%}">
+                    <i class="far fa-heart"></i>
+                    </a>
+                <p class="chip">Add to wishlist</p>
+            </section>
+        
+            <section class="top_card">
+           
+                <div class="image_product">
+                    <a href="{%url "more" product.id%}">
+                    <img src="{%static product.img_link%}" alt="product image">
+                    </a>
+                </div>
+        
+                <div class="detail_product">
+        
+                    <p class="pro_ct"><a style="font-size:smaller;" href="">{{product.category}}</a></p>
+        
+                    <p class="pro_nm"><a href="{%url "more" product.id%}">{{product.name}}</a></p>
+        
+                    <section class="pro_flx">
+                        <p class="pro_price">
+                           {%if product.final_price > 0 %}
+                            <a style="font-size: small;text-decoration: line-through; color: rgba(0, 0, 0, 0.829); margin-right: 5px;">Rs.{{product.price}}</a>
+                            <a>Rs.{{product.final_price}}</a>
+                            {%else%}
+                            <a>Rs.{{product.price}}</a>
+                            {%endif%}
+                        </p>
+                    </section>
+        
+                  
+        
+                </div>
+        
+            </section>
+        
+            <section class="bottom_cart">
+                {%if product.inStock %}
+                {%if user.is_authenticated %}
+                <a data-pid="{{product.id}}" id="{{product.id}}" class="add-to-cart"><i class="fas fa-shopping-cart" style="margin: 0 5px;"></i> Add to Cart</a>
+
+              {%else%}
+              <a class="add_item"><i class="fas fa-shopping-cart" style="margin: 0 5px;"></i> Add to Cart</a>
+              {%endif%}
+              {%else%}
+              <a style="color: black; background-color: #d9dee9;"><i class="fas fa-shopping-cart" style="margin: 0 5px;"></i>Out of Stock</a>
+              {%endif%}
+            </section>
+        
+        </div>
+        {%endfor%}
+        
+          </div>
+</div>
+
+
+<div class="back_">
+           
+    <a href="{%url "index"%}" class="add_" style=" background-color: #6973fe;"><i class="fas fa-chevron-left"></i> Continue Shopping</a>
+</div>
+
+
+{%endblock content%}
+
+{%block js%}
+<script>
+
+
+$('.slider').slick({
+        infinite: true,
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 2,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        arrows: true,
+        prevArrow: '<div class="slick-prev"><i class="fas fa-arrow-left" aria-hidden="true"></i></div>',
+        nextArrow: '<div class="slick-next"><i class="fas fa-arrow-right" aria-hidden="true"></i></div>',
+        responsive: [{
+           
+            breakpoint: 1300,
+            settings: {
+                slidesToShow: 3,
+                slidesToScroll: 1
+            }
+        },
+        {
+            breakpoint: 950,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1
+            }
+        },
+        {
+            breakpoint: 700,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+        }
+        
+        ]
+    });
+
+
+item=document.getElementsByClassName('add_item')
+    let i=0
+    for(i=0;i<item.length;i++){
+        item[i].addEventListener('click',()=>{
+       document.querySelector(".login_overlay").style.display="flex"
+        })
+    }
+$( ".owl-prev").html('<i class="fas fa-chevron-left"></i>');
+ $( ".owl-next").html('<i class="fas fa-chevron-right"></i>');
+</script>
+
+{%endblock js%}

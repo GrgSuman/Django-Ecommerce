@@ -1,0 +1,517 @@
+{%extends "base.html"%}
+
+
+{%block style%}
+<style>
+.top_show_info{
+        height:100px;
+        align-items: center;
+        background-color: #373f50;
+        padding:30px 8%;
+        display: flex;
+        justify-content: space-between;
+    }
+    .top_show_info h2{
+        font-family: 'Poppins',sans-serif;
+       color: white;
+       line-height: 1.8em;
+    }
+    .top_show_info p{
+        font-family: 'Rubik';
+        color: rgba(255, 255, 255, 0.753);
+        letter-spacing: 0.05em;
+    }
+    .top_show_info a{
+        color: white;
+    }
+
+
+    .cart_details{
+        display:flex;
+        margin: 20px 8%;
+    }
+   
+    .cart_details h2{
+        font-family: 'Poppins';
+        font-weight:normal;
+        font-size:20px;
+        
+    }
+    .cart_main{
+        margin: 20px 0;
+       flex: 2.5;
+       padding: 10px; 
+    }
+
+    .cart_side{
+       padding: 10px 20px;
+       flex: 1;
+       margin: 20px 30px;
+       height:300px;
+       position: sticky;
+       top: 100px;
+       box-shadow: 0px 2px 6px 0px rgb(0 0 0 / 20%);
+    }
+    
+    .head_cart{
+        display: flex;
+       justify-content: space-between;
+       border-bottom: 2px solid #e3e9ef;
+
+    }
+    .actual_list{
+        display: flex;
+        margin:40px 0;
+    }
+    .P_HEAD{
+        color: rgba(0, 0, 0, 0.774);
+        font-weight: 600;
+        margin-bottom:40px;
+    }
+
+    .view_product{
+        flex:2.9;
+      
+    }
+    .product_price{
+        flex:1;
+       
+    }
+    .manage_quantity{
+        flex:1.3;
+        
+    }
+    .product_subtotal{
+        flex:1;
+       
+    }
+    .history_,.current_{
+        color: rgba(0, 0, 0, 0.651);
+    }
+    .cat__{
+        color: rgba(0, 0, 0, 0.699);
+    }
+    .rem__{
+        color: rgba(255, 0, 0, 0.884);
+    }
+    .rem__:hover{
+   cursor: pointer;
+   color: red;
+    }
+    
+    .promo input{
+    width:calc(100% - 20px);
+    padding: 8px 10px;
+    font-size: .9375rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #4b566b;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #dae1e7;
+    font-family: "Montserrat";
+    border-radius: .3125rem;
+    box-shadow: 0 0 0 0 transparent;
+    transition: border-color 0.2s ease-in-out,box-shadow 0.2s ease-in-out;
+    }
+
+    .promo input:focus{
+    color: #4b566b;
+    background-color: #fff;
+    border-color: rgba(254,105,106,0.3);
+    outline: 0;
+    transition: .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-shadow: 0 0 0 0 transparent, 0 0.375rem 0.625rem -0.3125rem rgba(254,105,106,0.15);
+ }
+ .promo button{
+    width: 100%;
+     padding: 12px 15px;
+     margin: 15px 0;
+     border: none;
+     outline: none;
+     font-size: 14px;
+     background-color: #fe696a;
+     font-family: 'Rubik';
+     color: white;
+     transition: .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+ }
+#btn{
+    width: 100%;
+     padding: 12px 15px;
+     margin: 15px 0;
+     border: none;
+     outline: none;
+     font-size: 14px;
+     background-color:dodgerblue;
+     font-family: 'Rubik';
+     color: white;
+     transition: .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+}
+.promo button:hover,#btn:hover{
+    cursor: pointer;
+    box-shadow: 0 0.5rem 1.125rem -0.5rem rgba(254,105,106,0.9);
+    transition: .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+}
+.history_order_{
+    transition: .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    padding: 5px 10px;
+    color: white;
+    background-color: dodgerblue;
+}
+.history_:hover{
+    cursor: pointer;
+    transition: .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.current_order_{
+    transition: .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    padding: 5px 10px;
+    color: white;
+    background-color: dodgerblue;
+}
+
+.current_:hover{
+    cursor: pointer;
+    transition: .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.history_items{
+    display: none;
+}
+.h_len{
+    display: none;
+}
+
+
+
+/* responsive */
+
+@media(max-width: 1295px){
+    .cart_details{
+        margin: 20px 3%;
+    }
+}
+
+@media(max-width: 1150px){
+    .cart_details{
+        display: block;
+        margin: 20px 3%;
+        overflow-x: scroll;
+
+    }
+}
+
+@media(max-width:1070px){
+    .top_show_info{
+        height: 100px;
+        align-items: center;
+    }
+}
+
+@media(max-width: 915px){
+    .cart_main{
+        width: 700px;
+
+    }
+}
+
+@media(max-width:550px){
+    .top_show_info{
+        height: 100px;
+        align-items: flex-start;
+        flex-direction: column;
+}
+.top_show_info h2{
+    margin: 0;
+}
+.head_cart h1{
+    font-size: 1.3rem;
+}
+.head_cart h2{
+    font-size: 17px;
+}}
+</style>
+{%endblock%}
+
+
+{%block content%}
+{%load static%}
+
+<div class="top_show_info">
+    <h2>Your order details</h2>
+    <p><a href="{%url "index"%}"><i class="fas fa-home"></i> Home</a>  > order-track</p>
+   </div>
+
+{%if user.is_authenticated %}
+
+<div class="cart_details">
+    
+<section class="cart_main">
+
+<div class="head_cart">
+    <h2><span style="margin-right:10px" class="current_ current_order_">Current Orders</span> <span class="history_">Shopping History</span></h2>
+    <h2 class="c_len">Items: {{cart}}</h2>
+    <h2 class="h_len">Items: {{h_len}}</h2>
+</div>
+
+
+<div class="current_items">
+
+{%if cart %}
+
+{%if order %}
+
+<section class="view_product" style="display:flex;justify-content:space-between;">
+    <p class="P_HEAD" style="flex: 2.9;">Product Details</p>
+    <p class="P_HEAD" style="text-align: center; flex: 1.3;"> Quantity</p>
+    <p class="P_HEAD" style="text-align: center;flex: 1;">Price</p>
+    <p class="P_HEAD" style="text-align: center;flex: 1;">Subtotal</p>
+</section>
+
+
+    {%for item in cartItem%}
+
+    <div class="actual_list">
+    
+        <section class="view_product">
+            <span style="display: flex; align-items: flex-start;">
+                <img style="height: 100px; width:120px;" src="{%static item.product.img_link%}" alt="">
+                <div style="margin-left:20px;">
+                    <p style="margin: 0;" >{{item.product.name}}</p>
+                    <p class="cat__" style="font-size: 14px;">{{item.product.category}}</p>
+               
+                </div>
+            </span>
+            
+        </section>
+    
+        <section class="manage_quantity">
+            <span style="display: flex;justify-content: space-around;align-items: center;margin-top: -13px;">
+               
+                <p class="count_item_qty">{{item.quantity}}</p>
+               
+            </span>
+        </section>
+    
+        <section class="product_price" >
+            <p style="text-align: center;">Rs.{{item.product.price}}</p>
+        </section>
+    
+        <section class="product_subtotal" >
+            <p style="text-align: center;">Rs. <span class="cart_subtotal">{{item.subtotal}}</span> </p>
+        </section>
+    </div>
+    {%endfor%}
+    
+
+
+{%if order.status == "PENDING"%}
+<h3 style="margin-top: 40px;"><a href="{%url "index"%}"><i class="fas fa-arrow-left" style="font-weight: normal;margin-right: 5px;"></i> Continue Shopping</a></h2>
+    {% endif %}
+
+    {%if order.status == "DELIVERED"%}
+    <h3 style="margin-top: 40px;text-align: center; font-weight: 100;"><a style="background-color: dodgerblue; color: white; padding: 10px 20px;" href="{%url "order-complete"%}">Thanks for Shopping <i style="margin-left: 10px;" class="far fa-handshake"></i></a></h3>
+        {% endif %}
+
+<!-- IF DONOT HAVE ORDER BUT HAVE CARTITEM -->
+{%else%}
+
+<div style="display: flex;justify-content: center;
+align-items: center; flex-direction: column;">
+<h3 style="margin: 30px 0;">You have added items in cart. For confirmation you need to go to checkout page.</h3>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<lottie-player src="https://assets10.lottiefiles.com/packages/lf20_15TIGR.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop  autoplay></lottie-player>
+<h3 style="margin-top: 40px;font-weight: 100;"><a style="color: white; background-color: dodgerblue;padding: 10px 20px; " href="{%url "checkout"%}">Go to checkout<i class="fas fa-arrow-right" style="font-weight: normal;margin-left: 10px;"></i></a></h3>
+</div>
+
+
+{%endif%}
+
+<!-- IF DONOT HAVE CARTITEM -->
+{%else%}
+<div style="display: flex;justify-content: center;
+align-items: center; flex-direction: column;">
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<lottie-player src="https://assets7.lottiefiles.com/packages/lf20_dkc8tvbm.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop  autoplay></lottie-player>
+</div>
+<h3 style="margin-top: 40px;"><a href="{%url "index"%}"><i class="fas fa-arrow-left" style="font-weight: normal;margin-right: 5px;"></i> Continue Shopping</a></h2>
+
+{%endif%}
+</div>
+
+
+
+<!-- history -->
+
+<div class="history_items">
+    {%if history%}
+    <section class="view_product" style="display:flex;justify-content:space-between;">
+        <p class="P_HEAD" style="flex: 2.9;">Product Details</p>
+        <p class="P_HEAD" style="text-align: center; flex: 1.3;"> Quantity</p>
+        <p class="P_HEAD" style="text-align: center;flex: 1;">Price</p>
+        <p class="P_HEAD" style="text-align: center;flex: 1;">Subtotal</p>
+    </section>
+    
+
+    {%for item in history%}
+
+    <div class="actual_list">
+    
+        <section class="view_product">
+            <span style="display: flex; align-items: flex-start;">
+                <img style="height: 100px; width:120px;" src="{%static item.product.img_link%}" alt="">
+                <div style="margin-left:20px;">
+                    <p style="margin: 0;" >{{item.product.name}}</p>
+                    <p class="cat__" style="font-size: 14px;">{{item.product.category}}</p>
+                </div>
+            </span>
+            
+        </section>
+    
+        <section class="manage_quantity">
+            <span style="display: flex;justify-content: space-around;align-items: center;">
+                <p>{{item.quantity}}</p>
+            </span>
+        </section>
+    
+        <section class="product_price" >
+            <p style="text-align: center;">Rs.{{item.product.price}}</p>
+        </section>
+    
+        <section class="product_subtotal" >
+            <p style="text-align: center;">Rs.{{item.subtotal}}</p>
+        </section>
+    </div>
+    {%endfor%}
+{%else%}
+<div style="display: flex;justify-content: center;
+align-items: center; flex-direction: column;">
+<h3>No shopping done yet.</h3>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<lottie-player src="https://assets10.lottiefiles.com/private_files/lf30_upj9unk0.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop  autoplay></lottie-player>
+<h3 style="margin-top: 40px;"><a href="{%url "index"%}"><i class="fas fa-arrow-left" style="font-weight: normal;margin-right: 5px;"></i> Lets Shop</a></h2>
+</div>
+
+{%endif%}
+    
+</div>
+
+
+
+</section>
+
+
+<section class="cart_side">
+    <div class="head_cart">
+        <h2>Current Order Summary</h2>
+    </div>
+
+
+    <section style="display: flex;justify-content: space-between;">
+        <h4>Order Status</h4>
+        {%if order.status%}
+        <h4 style="background-color: yellow;">{{order.status}}</h4>
+        {%else%}
+        <h4 style="background-color: yellow;">na</h4>
+        {%endif%}
+      
+    </section>
+
+    <section style="display: flex;justify-content: space-between;">
+        <h4>Paid</h4>
+        {%if order.status%}
+        {%if order.status == "DELIVERED" %}
+        <h4 style="background-color: yellow;">Paid</h4>
+        {%else%}
+        <h4 style="background-color: yellow;">Remaining (Cash on Delivery)</h4>
+        {%endif%}
+       
+        {%else%}
+        <h4 style="background-color: yellow;">na</h4>
+        {%endif%}
+
+    </section>
+
+
+       
+       <div style="border-bottom: 2px solid #e3e9ef;">
+
+    </div>
+
+
+    <section style="display: flex;justify-content: space-between;">
+        <h4>Total :</h4>
+        {%if order.status%}
+        <h4>Rs. <span class="cart_total"> {{total}}</span></h4>
+        {%else%}
+        <h4>na</h4>
+        {%endif%}
+    </section>
+
+
+</section>
+</div>
+
+
+{%else%}
+
+<div style="display: flex;justify-content: center;
+align-items: center; flex-direction: column;">
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<lottie-player src="https://assets7.lottiefiles.com/packages/lf20_dkc8tvbm.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop  autoplay></lottie-player>
+<h3 style="margin-top: 40px;"><a href="{%url "index"%}"><i class="fas fa-arrow-left" style="font-weight: normal;margin-right: 5px;"></i> Continue Shopping</a></h2>
+</div>
+
+
+
+{%endif%}
+
+
+{%endblock content%}
+
+
+{%block js%}
+<script>
+
+
+    current_btn=document.querySelector(".current_")
+    history_btn=document.querySelector(".history_")
+
+    current_items=document.querySelector(".current_items")
+    history_items=document.querySelector(".history_items")
+
+    h_len=document.querySelector(".h_len")
+    c_len=document.querySelector(".c_len")
+
+    history_btn.addEventListener("click",()=>{
+        current_items.style.display="none"
+        history_items.style.display="block"
+
+        h_len.style.display="block"
+        c_len.style.display="none"
+
+        current_btn.classList.remove("current_order_")
+        history_btn.classList.add("history_order_")
+
+    })
+
+    current_btn.addEventListener("click",()=>{
+        current_items.style.display="block"
+        history_items.style.display="none"
+
+        h_len.style.display="none"
+        c_len.style.display="block"
+
+        current_btn.classList.add("current_order_")
+        history_btn.classList.remove("history_order_")
+
+    })
+
+
+    // current_order_ history_order_  
+
+
+
+</script>
+{%endblock js%}
